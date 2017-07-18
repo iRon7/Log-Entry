@@ -261,4 +261,4 @@ The following command returns a string revealing the `WinNT User` object up to a
 The `ConvertTo-Text` function (alias `CText`)  mainly exists as a helper for the `Log-Entry` function but could be used to e.g. quickly resolve an object without logging: `Write-Host (CText $Var)`.
 
 
-  [1]: https://i.stack.imgur.com/a8ny4.png
+  [1]: https://i.stack.imgur.com/GLHU1.png
