@@ -1,5 +1,4 @@
-*This article is completely revised 2017-07-18 as the new [`Log-Entry`](https://github.com/iRon7/Log-Entry) solution replaces the former [`Write-Log`](https://github.com/iRon7/Write-Log) solution which will not be further updated. See also: [Migrating from Write-Log](https://github.com/iRon7/Log-Entry/blob/master/Migrating%20from%20Write-Log.md).*
-
+*This repository replaces the former [`Write-Log`](https://github.com/iRon7/Write-Log) solution which will not be further updated. See also: [Migrating from Write-Log](https://github.com/iRon7/Log-Entry/blob/master/Migrating%20from%20Write-Log.md).*
 
 ----------
 In general, I find that logging is underestimated for Microsoft scripting languages. Not only at design time of a script (or cmdlet) logging comes in handy but when the script gets deployed and something goes wrong you often wish that you had much better logging in place.  
