@@ -53,10 +53,10 @@ I have put the whole solution in a framework consisting few major parts:
  1. A framework including a help header - and a `Main` function template with a few examples
  2. A `My` object that contains some script - and logging definitions
  2. Four functions to control the logging:
-   - `ConvertTo-Text` (alias `CText`) to resolve objects
-   - `Set-LogFile` (alias `LogFile`) to set the location of the log file
    - `Log-Entry` (alias `Log`) to log information and objects
+   - `Set-LogFile` (alias `LogFile`) to set the location of the log file
    - `End-Script` (alias `End`) which might be used to nicely close the session
+   - `ConvertTo-Text` (alias `CText`) to resolve objects
 
 For the latest [`Log-Entry.ps1`](https://github.com/iRon7/Log-Entry/Log-Entry.ps1) version, see: https://github.com/iRon7/Log-Entry.
 
