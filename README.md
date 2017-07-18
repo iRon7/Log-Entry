@@ -45,7 +45,7 @@ Robust
 If you want to go for a robust logging solution, you probably want to go with the native Start-Transcript cmdlet but you will probably find out that the  `Start-Transcript` lacks features, like timestamps, that you might expect from a proper logging cmdlet. You could go for a 3rd party solution but this usually means extra installation procedures and dependencies.  
 So you decide to write it yourself but even the simplest solution where you just write information to a file might already cause an issue in the field: the file might not be accessible. It might even exist but your script is triggered twice and multiple instances run at the same time the log file might be open by one of instances and access is denied from the other instance  (see e.g.: https://stackoverflow.com/questions/5548283/powershell-scheduled-tasks-conflicts). And just at this point, logging should actually help you to troubleshoot what is going on as a repetitive trigger might also cause unexpected behavior in the script itself. For this particular example, the solution I present here buffers the output until it is able to write. But there are a lot more traps in writing a logging cmdlet and correctly formatting the output.
 
-Write-Log
+Framework
 =========
 
 I have put the whole solution in a framework consisting few major parts:
