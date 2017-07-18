@@ -104,28 +104,28 @@ The log file location can be redirected with the `Set-LogFile` command.
 
 The following command returns a string that describes the object contained by the `$var` variable:
 
-    LogFile .\Test.log					# Redirect the log file location (Optional)
-    Log -Color Yellow "Examples:"
-    Log "Several examples that usually aren't displayed by Write-Host:" $NotSet @() @(@()) @(@(), @()) @($Null)
-    Log -Indent 1 "Note 1: An empty string:" "" "isn't displayed by Log-Entry either (as you usually do not want every comment quoted)."
-    Log -Indent 2 "In case you want to reveal a (possible) empty string, use -QuoteString:" -NoNewline; Log -QuoteString ""
-    Log -Indent 1 "Note 2: An empty array embedded in another array:" @(@()) "is flattened by PowerShell (and not Write-Log)."
-    Log -Indent 2 "To prevent this use a comma in front of the embbed array: " @(,@())
-    Log "A hashtable:" @{one = 1; two = 2; three = 3}
-    Log "A recursive hashtable:" @{one = @{one = @{one = 1; two = 2; three = 3}; two = 2; three = 3}; two = 2; three = 3} -Expand -Depth:9
-    Log "Character array:" "Hallo World".ToCharArray()
-    Log-Verbose "The following line produces a error which is captured in the log file:"
-    $File = Log "File:" (Get-ChildItem "C:\NoSuchFile.txt" -ErrorAction SilentlyContinue)
-    Log-Verbose "The switch -FlushErrors prevents the error being logged:"
-    $File = Log "File:" (Get-ChildItem "C:\NoSuchFile.txt" -ErrorAction SilentlyContinue) -FlushErrors
-    Log "Below are two inline log examples (the object preceding the ""?"" is returned):"
-    $Height = Log "Height:" 3 ? "Inch"
-    $Width  = Log "Width:"  4 ? "Inch"
-    Log-Verbose "Or one display/log line spread over multiple code lines:"
-    Log "Periphery:" -NoNewline
-    $Periphery = Log (2 * $Height + 2 * $Width) ? -Color Green -NoNewline
-    Log "Inch"
-    Log-Debug "Password:" $Password "(This will not be shown and captured unless the common -Debug argument is supplied)"
+	LogFile .\Test.log					# Redirect the log file location (Optional)
+	Log -Color Yellow "Examples:"
+	Log "Several examples that usually aren't displayed by Write-Host:" $NotSet @() @(@()) @(@(), @()) @($Null)
+	Log -Indent 1 "Note 1: An empty string:" "" "isn't displayed by Log-Entry either (as you do not want every comment quoted)."
+	Log -Indent 2 "In case you want to reveal a (possible) empty string, use -QuoteString:" -NoNewline; Log -QuoteString ""
+	Log -Indent 1 "Note 2: An empty array embedded in another array:" @(@()) "is flattened by PowerShell (and not Write-Log)."
+	Log -Indent 2 "To prevent this use a comma in front of the embbed array: " @(,@())
+	Log "A hashtable:" @{one = 1; two = 2; three = 3}
+	Log "A recursive hashtable:" @{one = @{one = @{one = 1; two = 2; three = 3}; two = 2; three = 3}; two = 2; three = 3} -Expand -Depth:9
+	Log "Character array:" "Hallo World".ToCharArray()
+	Log-Verbose "The following line produces a error which is captured in the log file:"
+	$File = Log "File:" (Get-ChildItem "C:\NoSuchFile.txt" -ErrorAction SilentlyContinue)
+	Log-Verbose "The switch -FlushErrors prevents the error being logged:"
+	$File = Log "File:" (Get-ChildItem "C:\NoSuchFile.txt" -ErrorAction SilentlyContinue) -FlushErrors
+	Log -Color Magenta "Below are two inline log examples (the object preceding the ""?"" is returned):"
+	$Height = Log "Height:" 3 ? "Inch"
+	$Width  = Log "Width:"  4 ? "Inch"
+	Log-Verbose "Or one display/log line spread over multiple code lines:"
+	Log "Periphery:" -NoNewline
+	$Periphery = Log (2 * $Height + 2 * $Width) ? -Color Green -NoNewline
+	Log "Inch"
+	Log-Debug "Password:" $Password "(This will not be shown and captured unless the common -Debug argument is supplied)"
 
 **Display**
 
