@@ -14,28 +14,6 @@
 
 [CmdletBinding()] Param()
 
-Function Main1 {
-	LogFile .\Test.log				# Redirect the log file name and location (Optional)
-	Log -Color Yellow "Tests:"
-	Log "Not set (null):" $NotSet
-
-	$Height = Log "Height:" 3 ? "Inch"
-	$Width  = Log "Width:"  4 ? "Inch"
-	Log "Periphery:" -NoNewline
-	Log (2 * $Height + 2 * $Width) -Color Green -NoNewline
-	Log "Inch"
-	
-	Log-Debug "Debug Test"
-	Log-Verbose "Verbose Test"
-	
-	Get-ChildItem NoSuchFile.txt -ErrorAction SilentlyContinue
-	Log "Test" -FlushErrors
-
-	$File = Log "File:" (Get-ChildItem NoSuchFile.txt -ErrorAction SilentlyContinue) -FlushErrors
-	Log "Test"
-
-}
-
 Function Main {
 	LogFile .\Test.log					# Redirect the log file location (Optional)
 	Log -Color Yellow "Examples:"
