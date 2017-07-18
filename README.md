@@ -106,7 +106,7 @@ The example commands are displayed in the following format:
 
 **Log file**
 
-The example commands create are recorded in the log file like this: 
+The example commands record the following information in the log file: 
 
 <!-- language: lang-none -->
 
