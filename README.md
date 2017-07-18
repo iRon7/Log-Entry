@@ -76,8 +76,8 @@ By default, the log file resides at <code>%temp%\<i>&lt;ScriptName&gt;</i>.log</
 
 |Account       |Location|
 |--------------|--------|
-|*&lt;User&gt;*|C:\Users\<i>&lt;User&gt;</i>\AppData\Local\Temp\<i>&lt;ScriptName&gt;</i>.log|
-|System        |C:\Windows\Temp\<i>&lt;ScriptName&gt;</i>.log|
+|*&lt;User&gt;*|C:\Users\*&lt;User&gt;*\AppData\Local\Temp\*&lt;ScriptName&gt;*.log|
+|System        |C:\Windows\Temp\*&lt;ScriptName&gt;*.log|
 
 The log file location can be redirected with the `Set-LogFile` command.
 
