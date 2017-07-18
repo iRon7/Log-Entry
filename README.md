@@ -73,6 +73,7 @@ Log-Entry
 
 The `Log-Entry` function (Alias `Write-Log`) displays and records cmdlet processing details in a file.  In general, the `Log-Entry` (or just `Log`) function everywhere were the `Write-Host` command is used. The difference is that with the `Log-Entry` command the information is not only written to the host but also captured with a time stamp in a log file.  
 By default, the log file resides at <code>%temp%\<i>&lt;ScriptName&gt;</i>.log</code> which depends on the account used:
+
 |Account       |Location|
 |--------------|--------|
 |*&lt;User&gt;*|<code>C:\Users\<i>&lt;User&gt;</i>\AppData\Local\Temp\<i>&lt;ScriptName&gt;</i>.log</code>|
