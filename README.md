@@ -182,7 +182,7 @@ Set-LogFile
 The `Set-LogFile` function (Alias: `LogFile`) redirects the log file to a different location (the default location is: <code>%temp%\<i>&lt;ScriptName&gt;</i>.log</code>). Each time a script starts logging, a new session will be created in the log file.   
 Each log file session starts with:
 
-<code><i>&lt;yyyy-MM-dd&gt;</i>  PowerShell version: <i>&lt;PowerShell version&gt;</i>, process start: <i>&lt;yyyy-MM-dd HH:mm:ss&gt;</i></code>
+<code><i>&lt;yyyy-MM-dd&gt;</i>  PowerShell version: <i>&lt;PowerShell version&gt;</i>, process start: <i>&lt;yyyy-MM-dd HH:mm:ss&gt;</i></code>  
 <code><i>&lt;HH:mm:ss.ff&gt;</i> Log-Entry version: <i>&lt;script version&gt;</i>, command line: <i>&lt;command line&gt;</i></code>
 
 Log file sessions are separated by a divider which is by default an empty line. Empty lines can usually not be logged because newlines are inserted and outlined with spaces and tabs with to align the information with the rest of the contents. Each time a new session is started, the size of the log file is checked. If the log file is larger then 100Kb (default), the log file is truncated after the session that exceeds the preserved size  boundary.
