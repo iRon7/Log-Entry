@@ -126,6 +126,7 @@ The following command returns a string that describes the object contained by th
     Log-Debug "Password:" $Password "(This will not be shown and captured unless the common -Debug argument is supplied)"
 
 **Display**
+
 [![Display][1]][1]
 
 **Log file**
