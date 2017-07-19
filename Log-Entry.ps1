@@ -29,7 +29,7 @@ Function Main {
 	$File = Log "File:" (Get-ChildItem "C:\NoSuchFile.txt" -ErrorAction SilentlyContinue)
 	Log-Verbose "The switch -FlushErrors prevents the error being logged:"
 	$File = Log "File:" (Get-ChildItem "C:\NoSuchFile.txt" -ErrorAction SilentlyContinue) -FlushErrors
-	Log "Below are two inline log examples (the object preceding the ""?"" is returned):"
+	Log -Color Magenta "Below are two inline log examples (the object preceding the ""?"" is returned):"
 	$Height = Log "Height:" 3 ? "Inch"
 	$Width  = Log "Width:"  4 ? "Inch"
 	Log-Verbose "Or one display/log line spread over multiple code lines:"
@@ -39,11 +39,6 @@ Function Main {
 	Log-Debug "Password:" $Password "(This will not be shown and captured unless the common -Debug argument is supplied)"
 }
 
-Function Complex {
-	Log "Volatile Environment:" (Get-Item "HKCU:\Volatile Environment") -Expand
-	Log "WinNT user object:" ([ADSI]"WinNT://./$Env:Username") -Depth 5 -Expand
-	Log "The 'My' object, used by the Log-Entry engine, contains this:" $My -Expand
-}
 # ------------------------------------- Global --------------------------------
 Function Global:ConvertTo-Text([Alias("Value")]$O, [Int]$Depth = 9, [Switch]$Type, [Switch]$Expand, [Int]$Strip = -1, [String]$Prefix, [Int]$i) {
 	Function Iterate($Value, [String]$Prefix, [Int]$i = $i + 1) {ConvertTo-Text $Value -Depth:$Depth -Strip:$Strip -Type:$Type -Expand:$Expand -Prefix:$Prefix -i:$i}
