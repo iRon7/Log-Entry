@@ -7,7 +7,7 @@
 	Author:    Ronald Bode
 	Version:   02.01.00
 	Created:   2009-03-18
-	Modified:  2017-06-11
+	Modified:  2017-07-19
 .Link
 	https://github.com/iRon7/Log-Entry
 #>
