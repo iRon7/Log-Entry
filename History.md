@@ -1,6 +1,6 @@
 |Version |Date      |Author      |Comments|
 |--------|----------|------------|--------|
-|00.00.01|2009-03-18|Ronald Bode |Initial release|
+|00.00.01|2009-⁠03-⁠18|Ronald Bode |Initial release|
 |00.xx.xx|          |Ronald Bode |Assiosated with other cmdlets|
 |01.00.00|2017-05-31|Ronald Bode |Prepared for publication|
 |01.00.01|2017-05-31|Ronald Bode |Added `-Strip` option for large embedded strings|
