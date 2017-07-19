@@ -5,7 +5,7 @@
 	A PowerShell framework for sophisticated logging
 .Notes
 	Author:    Ronald Bode
-	Version:   02.01.00
+	Version:   02.01.01
 	Created:   2009-03-18
 	Modified:  2017-07-19
 .Link
@@ -122,7 +122,8 @@ Function Global:Set-LogFile([Parameter(Mandatory=$True)][IO.FileInfo]$Location, 
 }; Set-Alias LogFile Set-LogFile -Scope:Global -Description "Redirects the log file to a custom location"
 
 Function End-Script([Switch]$Exit, [Int]$ErrorLevel) {
-	Log ("End (execution time: " + ((Get-Date) - $My.Log.ScriptStart) + ", process time: " + ((Get-Date) - $My.Log.ProcessStart) + ")")
+	Log "End" -NoNewline
+	Log ("(execution time: " + ((Get-Date) - $My.Log.ScriptStart) + ", process time: " + ((Get-Date) - $My.Log.ProcessStart) + ")")
 	If ($Exit) {Exit $ErrorLevel} Else {Break Script}
 }; Set-Alias End End-Script -Scope:Global -Description "Logs the remaining entries and errors and end the script"
 
