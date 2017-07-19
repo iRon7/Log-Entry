@@ -10,7 +10,7 @@
 |        |          |            |Fixed: value of system.byte is not shown|
 |01.00.05|2017-06-22|Ronald Bode |Fixed: errors due to missing or incorrect help header|
 |01.00.06|2017-06-25|Ronald Bode |Fixed `Log-Debug` and `Log-Verbose` (`CmdletBinding` was missing)|
-|02.01.00|2017-06-25|Ronald Bode |Major release change|
+|02.01.00|2017-07-19|Ronald Bode |Major release change|
 |        |          |            |Renamed solution to `Log-Entry` (formerly called `Write-Log`)|
 |        |          |            |`Set-LogFile` (alias `LogFile`) function.|
 |        |          |            |The `-Debug` parameter has moved to a separate `Log-Debug` alias function.|
