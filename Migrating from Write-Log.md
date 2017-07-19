@@ -19,5 +19,9 @@ The `Log-Entry` framework is the successor of the `Write-Log` framework with a f
 
 Note that the session header in the log file of the `Log-Entry` framework slightly changed to:
 
-    2017-07-06 	PowerShell version: 5.1.15063.413, process start: 2017-06-29 16:29:56.70
-    12:41:32.62	<ScriptName> version: ##.##.##, command line: C:\Users\<User>\<ScriptName>.ps1
+<code><i>&lt;yyyy-MM-dd&gt;</i> 	PowerShell version: <i>&lt;PowerShell version&gt;</i>, process start: <i>&lt;yyyy-MM-dd HH:mm:ss&gt;</i></code>  
+<code><i>&lt;HH:mm:ss.ff&gt;</i>	Log-Entry version: <i>&lt;script version&gt;</i>, command line: <i>&lt;command line&gt;</i></code>
+
+If the `End-Script` function is used the session will be terminated with:
+
+<code><i>&lt;HH:mm:ss.ff&gt;</i>	End (Execution time: <i>&lt;dd:HH:mm:ss.fffffff&gt;</i>, Process time: <i>&lt;dd:HH:mm:ss.fffffff&gt;</i>)</code>
