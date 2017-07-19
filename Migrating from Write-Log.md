@@ -11,10 +11,11 @@ The `Log-Entry` framework is the successor of the `Write-Log` framework with a f
 |                   |`-Separator`       |Defines the separator between each entry (default: single space). Note that former `Write-Log -File <FileName> -Separator <String>` has been replaced by `Set-LogFile <FileName> -Divider <String>`|
 |`-Prefix`          |`-NoNewline`       |The `-Prefix` parameter has depleted and replaced by the `-NoNewline` parameter. The implementation is similar to `Write-Host` implementation except that it places a separator in front of the following entry (use `-Separator ""` suppresses this feature)|
 |`-Delay`           |                   |The `-Delay` parameter has depleted. The `-NoNewline` parameter delays the file write until the next log. ``Log -NoNewline "Following information:`r`n"`` has a similar result.|
-|`-Color`           |`-⁠ForegroundColor` |The `-Color` parameter changed to `-ForegroundColor` to be consistent with `Write-Host -ForegroundColor <Color>` but the `-color` alias for this parameter is still available (no modifications required).|
 |                   |`-BackgroundColor` |The `-BackgroundColor` is added and sets the background color of the displayed entry similar to `Write-Host -BackgroundColor`|
+|`-Color`           |`-⁠ForegroundColor` |The `-Color` parameter changed to `-ForegroundColor` to be consistent with `Write-Host -ForegroundColor <Color>` but the `-color` alias for this parameter is still available (no modifications required).|
 |                   |`-Strip`           |The `-Strip` feature is new and truncates strings at the given length and removes redundant white space characters if the value supplied is equal or larger than `0`. Set `-Strip -1` prevents truncating and the removal of with space characters. The default value for `log-entry` is `-1`.|
-|                   |`-FlushErrors`     |The `-FlushErrors` is new and suppresses any errors that occurred since last log entry|
+|                   |`-FlushErrors`     |The `-FlushErrors` is new and suppresses any errors that occurred since last log entry.|
+|`Log "End"`        |`End-Script"`      |The `End-Script` function (Alias: `End`) is recommended to log the remaining errors and close the log session with the execution time.|
 
 Note that the session header in the log file of the `Log-Entry` framework slightly changed to:
 
