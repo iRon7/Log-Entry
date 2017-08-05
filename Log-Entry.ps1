@@ -5,9 +5,9 @@
 	A PowerShell framework for sophisticated logging
 .Notes
 	Author:    Ronald Bode
-	Version:   02.01.01
+	Version:   02.01.02
 	Created:   2009-03-18
-	Modified:  2017-07-19
+	Modified:  2017-08-05
 .Link
 	https://github.com/iRon7/Log-Entry
 #>
@@ -51,14 +51,13 @@ Function Global:ConvertTo-Text([Alias("Value")]$O, [Int]$Depth = 9, [Switch]$Typ
 		ElseIf ($O -is "Xml") {(@(Select-XML -XML $O *) -Join "$NewLine$Space") + $NewLine}
 		ElseIf ($i -gt $Depth) {$Type = $True; "..."}
 		ElseIf ($O -is "Array") {"@(", @(&{For ($_ = 0; $_ -lt $O.Count; $_++) {Iterate $O[$_]}}), ")"}
-		ElseIf ($O.GetEnumerator.OverloadDefinitions) {"@{", @(ForEach($_ in $O.Keys) {Iterate $O.$_ "$_ = "}), "}"}
-		ElseIf ($O.PSObject.Properties -and !$O.value.GetTypeCode) {"{", @(ForEach($_ in $O.PSObject.Properties | Select -Exp Name) {Iterate $O.$_ "$_`: "}), "}"}
+		ElseIf ($O.GetEnumerator.OverloadDefinitions) {"@{", (@(ForEach($_ in $O.Keys) {Iterate $O.$_ "$_ = "}) -Join "; "), "}"}
+		ElseIf ($O.PSObject.Properties -and !$O.value.GetTypeCode) {"{", (@(ForEach($_ in $O.PSObject.Properties | Select -Exp Name) {Iterate $O.$_ "$_`: "}) -Join "; "), "}"}
 		Else {$Type = $True; "?"}}
 	If ($Type) {$Prefix += "[" + $(Try {$O.GetType()} Catch {$Error.Remove($Error[0]); "$Var.PSTypeNames[0]"}).ToString().Split(".")[-1] + "]"}
 	"$Space$Prefix" + $(If ($V -is "Array") {$V[0] + $(If ($V[1]) {$NewLine + ($V[1] -Join ", $NewLine") + "$NewLine$Space"} Else {""}) + $V[2]} Else {$V})
 }; Set-Alias CText ConvertTo-Text -Scope:Global -Description "Convert value to readable text"
 
-# ------------------------------------- Logging -------------------------------
 Function Global:Log-Entry {
 	Param(
 		$0, $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15,	# PSv2 doesn't support PositionalBinding
@@ -71,7 +70,7 @@ Function Global:Log-Entry {
 	If (!$My.Log.ContainsKey("Location")) {Set-LogFile "$Env:Temp\$($My.Name).log"}
 	If (!$My.Log.ContainsKey("Buffer")) {
 		$My.Log.ProcessStart = Get-Date ((Get-Process -id $PID).StartTime); $My.Log.ScriptStart = Get-Date
-		$My.Log.Buffer  = (Get-Date -Format "yyyy-MM-dd") + " `tPowerShell version: $($PSVersionTable.PSVersion), process start: " + (CText $My.Log.ProcessStart) + "`r`n"
+		$My.Log.Buffer  = (Get-Date -Format "yyyy-MM-dd") + " `tPowerShell version: $($PSVersionTable.PSVersion), process start: " + (ConvertTo-Text $My.Log.ProcessStart) + "`r`n"
 		$My.Log.Buffer += (Get-Date -Format "HH:mm:ss.ff") + "`t$($My.Name) version: $($My.Version), command line: $($My.Path) $($My.Arguments)`r`n"}
 	If ($FlushErrors) {$My.Log.ErrorCount = $Error.Count} ElseIf (!$My.Log.ContainsKey("ErrorCount")) {$My.Log.ErrorCount = 0}
 	While ($My.Log.ErrorCount -lt $Error.Count) {
