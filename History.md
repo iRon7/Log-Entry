@@ -22,4 +22,5 @@
 |        |          |            |Added `-Strip` feature is new and truncates strings at the given length and removes redundant white spaces|
 |        |          |            |Added `-FlushErrors` is new and suppresses any errors that occurred since last log entry.|
 |        |          |            |Added `End-Script` function (Alias: `End`) to log the remaining errors and close the log session|
-|02.01.01|2017-07-19|Ronald Bode |Fixed `End-Script` Error when no logs are done|
+|02.01.01|2017-07-19|Ronald Bode |Fixed `End-Script` error when no logs are done|
+|02.01.02|2017-08-03|Ronald Bode |Seperate hashtables and properties with a semicolon instead of a colon|
