@@ -5,7 +5,7 @@
 	A PowerShell framework for sophisticated logging
 .Notes
 	Author:    Ronald Bode
-	Version:   02.01.03
+	Version:   02.01.04
 	Created:   2009-03-18
 	Modified:  2017-08-23
 .Link
@@ -163,7 +163,7 @@ If ($My.Contents -Match '^\s*\<#([\s\S]*?)#\>') {$My.Help = $Matches[1].Trim()}
 }
 $My.Title = $My.Synopsis.Trim().Split("`r`n")[0].Trim()
 $My.Id = (Get-Culture).TextInfo.ToTitleCase($My.Title) -Replace "\W", ""
-$My.Notes -Split("\r\n") | ForEach {$Note = $_ -Split(":", 2); If ($Note[0].Trim()) {$My[$Note[0].Trim()] = $Note[1].Trim()}}
+$My.Notes -Split("\r\n") | ForEach {$Note = $_ -Split(":", 2); If ($Note.Count -gt 1) {$My[$Note[0].Trim()] = $Note[1].Trim()}}
 $My.Path = $My.File.FullName; $My.Folder = $My.File.DirectoryName; $My.Name = $My.File.BaseName
 $My.Arguments = (($MyInvocation.Line + " ") -Replace ("^.*\\" + $My.File.Name.Replace(".", "\.") + "['"" ]"), "").Trim()
 $Script:Debug = $MyInvocation.BoundParameters.Debug.IsPresent; $Script:Verbose = $MyInvocation.BoundParameters.Verbose.IsPresent
