@@ -25,3 +25,4 @@
 |02.01.01|2017-07-19|Ronald Bode |Fixed `End-Script` error when no logs are done|
 |02.01.02|2017-08-03|Ronald Bode |Seperate hashtables and properties with a semicolon instead of a colon|
 |02.01.03|2017-08-23|Ronald Bode |Resolved bug with `-Expand` parameter due to previous update|
+|02.01.04|2017-08-23|Ronald Bode |Prevent error caused by unexpected Notes header layout|
