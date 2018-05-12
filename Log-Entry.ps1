@@ -5,9 +5,9 @@
 	A PowerShell framework for sophisticated logging
 .Notes
 	Author:    Ronald Bode
-	Version:   02.01.04
+	Version:   02.01.05
 	Created:   2009-03-18
-	Modified:  2017-08-23
+	Modified:  2018-05-12
 .Link
 	https://github.com/iRon7/Log-Entry
 #>
@@ -173,4 +173,4 @@ $MyInvocation.MyCommand.Parameters.Keys | Where {Test-Path Variable:"$_"} | ForE
 }
 
 Main
-End																				# Recommended
+End	
