@@ -150,7 +150,7 @@ Function End-Script([Switch]$Exit, [Int]$ErrorLevel) {
 }; Set-Alias End End-Script -Scope:Global -Description "Logs the remaining entries and errors and end the script"
 
 $Error.Clear()
-Set-Variable -Option ReadOnly My @{
+Set-Variable -Option ReadOnly -Force My @{
 	File = Get-ChildItem $MyInvocation.MyCommand.Path
 	Contents = $MyInvocation.MyCommand.ScriptContents
 	Log = @{}
