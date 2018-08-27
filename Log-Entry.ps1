@@ -5,9 +5,9 @@
 	A PowerShell framework for sophisticated logging
 .Notes
 	Author:    Ronald Bode
-	Version:   02.01.05
+	Version:   02.01.06
 	Created:   2009-03-18
-	Modified:  2018-05-12
+	Modified:  2018-08-27
 .Link
 	https://github.com/iRon7/Log-Entry
 #>
@@ -25,6 +25,7 @@ Function Main {
 	Log "A hashtable:" @{one = 1; two = 2; three = 3}
 	Log "A recursive hashtable:" @{one = @{one = @{one = 1; two = 2; three = 3}; two = 2; three = 3}; two = 2; three = 3} -Expand -Depth:9
 	Log "Character array:" "Hallo World".ToCharArray()
+	Log "Test:" Log @{a="a";value="value"}
 	Log-Verbose "The following line produces a error which is captured in the log file:"
 	$File = Log "File:" (Get-ChildItem "C:\NoSuchFile.txt" -ErrorAction SilentlyContinue)
 	Log-Verbose "The switch -FlushErrors prevents the error being logged:"
@@ -47,7 +48,8 @@ Function Global:ConvertTo-Text([Alias("Value")]$O, [Int]$Depth = 9, [Switch]$Typ
 		$V = If ($O -is "Boolean")  {"`$$O"}
 		ElseIf ($O -is "String") {If ($Strip -ge 0) {'"' + (($O -Replace "[\s]+", " ") -Replace "(?<=[\s\S]{$Strip})[\s\S]+", "...") + '"'} Else {"""$O"""}}
 		ElseIf ($O -is "DateTime") {$O.ToString("yyyy-MM-dd HH:mm:ss")} 
-		ElseIf ($O -is "ValueType" -or (($O.Value.GetTypeCode -and $O.ToString.OverloadDefinitions) -and -not $O.GetEnumerator.OverloadDefinitions)) {$O.ToString()}		ElseIf ($O -is "Xml") {(@(Select-XML -XML $O *) -Join "$NewLine$Space") + $NewLine}
+		ElseIf ($O -is "ValueType" -or (($O.Value.GetTypeCode -and $O.ToString.OverloadDefinitions) -and -not $O.GetEnumerator.OverloadDefinitions)) {$O.ToString()}
+		ElseIf ($O -is "Xml") {(@(Select-XML -XML $O *) -Join "$NewLine$Space") + $NewLine}
 		ElseIf ($i -gt $Depth) {$Type = $True; "..."}
 		ElseIf ($O -is "Array") {"@(", @(&{For ($_ = 0; $_ -lt $O.Count; $_++) {Iterate $O[$_]}}), ", ", ")"}
 		ElseIf ($O.GetEnumerator.OverloadDefinitions) {"@{", @(ForEach($_ in $O.Keys) {Iterate $O.$_ "$_ = "}), "; ", "}"}
@@ -60,24 +62,6 @@ Function Global:ConvertTo-Text([Alias("Value")]$O, [Int]$Depth = 9, [Switch]$Typ
 			$NewLine + ($V[1] -Join $V[2]) + $NewLine + $Space
 		} Else {""}) + $V[3]
 	} Else {$V})
-}; Set-Alias CText ConvertTo-Text -Scope:Global -Description "Convert value to readable text"
-
-Function Global:ConvertTo-Text1([Alias("Value")]$O, [Int]$Depth = 9, [Switch]$Type, [Switch]$Expand, [Int]$Strip = -1, [String]$Prefix, [Int]$i) {
-	Function Iterate($Value, [String]$Prefix, [Int]$i = $i + 1) {ConvertTo-Text $Value -Depth:$Depth -Strip:$Strip -Type:$Type -Expand:$Expand -Prefix:$Prefix -i:$i}
-	$NewLine, $Space = If ($Expand) {"`r`n", ("`t" * $i)} Else{"", ""}
-	If ($O -eq $Null) {$V = '$Null'} Else {
-		$V = If ($O -is "Boolean")  {"`$$O"}
-		ElseIf ($O -is "String") {If ($Strip -ge 0) {'"' + (($O -Replace "[\s]+", " ") -Replace "(?<=[\s\S]{$Strip})[\s\S]+", "...") + '"'} Else {"""$O"""}}
-		ElseIf ($O -is "DateTime") {$O.ToString("yyyy-MM-dd HH:mm:ss")} 
-		ElseIf ($O -is "ValueType" -or ($O.Value.GetTypeCode -and $O.ToString.OverloadDefinitions)) {$O.ToString()}
-		ElseIf ($O -is "Xml") {(@(Select-XML -XML $O *) -Join "$NewLine$Space") + $NewLine}
-		ElseIf ($i -gt $Depth) {$Type = $True; "..."}
-		ElseIf ($O -is "Array") {"@(", @(&{For ($_ = 0; $_ -lt $O.Count; $_++) {Iterate $O[$_]}}), ")"}
-		ElseIf ($O.GetEnumerator.OverloadDefinitions) {"@{", (@(ForEach($_ in $O.Keys) {Iterate $O.$_ "$_ = "}) -Join "; "), "}"}
-		ElseIf ($O.PSObject.Properties -and !$O.value.GetTypeCode) {"{", (@(ForEach($_ in $O.PSObject.Properties | Select -Exp Name) {Iterate $O.$_ "$_`: "}) -Join "; "), "}"}
-		Else {$Type = $True; "?"}}
-	If ($Type) {$Prefix += "[" + $(Try {$O.GetType()} Catch {$Error.Remove($Error[0]); "$Var.PSTypeNames[0]"}).ToString().Split(".")[-1] + "]"}
-	"$Space$Prefix" + $(If ($V -is "Array") {$V[0] + $(If ($V[1]) {$NewLine + ($V[1] -Join ", $NewLine") + "$NewLine$Space"} Else {""}) + $V[2]} Else {$V})
 }; Set-Alias CText ConvertTo-Text -Scope:Global -Description "Convert value to readable text"
 
 Function Global:Log-Entry {
