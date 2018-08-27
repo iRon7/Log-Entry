@@ -27,3 +27,4 @@
 |02.01.03|2017-08-23|Ronald Bode |Resolved bug with `-Expand` parameter due to previous update|
 |02.01.04|2017-08-23|Ronald Bode |Prevent error caused by unexpected Notes header layout|
 |02.01.05|2018-05-12|Magnificent |Fixing multi-start issue with $My being readonly|
+|02.01.06|2018-08-27|GMouron     |FIX: Hashtable with entry with key "value" was not properly converted…|
