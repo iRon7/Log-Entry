@@ -23,8 +23,9 @@
 |        |          |            |Added `-FlushErrors` is new and suppresses any errors that occurred since last log entry.|
 |        |          |            |Added `End-Script` function (Alias: `End`) to log the remaining errors and close the log session|
 |02.01.01|2017-07-19|Ronald Bode |Fixed `End-Script` error when no logs are done|
-|02.01.02|2017-08-03|Ronald Bode |Seperate hashtables and properties with a semicolon instead of a colon|
+|02.01.02|2017-08-03|Ronald Bode |Separate hashtables and properties with a semicolon instead of a colon|
 |02.01.03|2017-08-23|Ronald Bode |Resolved bug with `-Expand` parameter due to previous update|
 |02.01.04|2017-08-23|Ronald Bode |Prevent error caused by unexpected Notes header layout|
-|02.01.05|2018-05-12|Magnificent |Fixing multi-start issue with $My being readonly|
-|02.01.06|2018-08-27|GMouron     |FIX: Hashtable with entry with key "value" was not properly converted…|
+|02.01.05|2018-05-12|Magnificent |Fixed issue #2: multi-start issue with $My being readonly|
+|02.01.06|2018-08-27|GMouron     |Fixed issue #3: Hashtable with entry with key "value" was not properly converted.|
+|02.01.07|2018-09-13|Ravynne     |Fixed issue #4: missing divider when -Preserve:0 (no preserve.|
