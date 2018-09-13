@@ -5,9 +5,9 @@
 	A PowerShell framework for sophisticated logging
 .Notes
 	Author:    Ronald Bode
-	Version:   02.01.06
+	Version:   02.01.07
 	Created:   2009-03-18
-	Modified:  2018-08-27
+	Modified:  2018-09-13
 .Link
 	https://github.com/iRon7/Log-Entry
 #>
@@ -25,7 +25,6 @@ Function Main {
 	Log "A hashtable:" @{one = 1; two = 2; three = 3}
 	Log "A recursive hashtable:" @{one = @{one = @{one = 1; two = 2; three = 3}; two = 2; three = 3}; two = 2; three = 3} -Expand -Depth:9
 	Log "Character array:" "Hallo World".ToCharArray()
-	Log "Test:" Log @{a="a";value="value"}
 	Log-Verbose "The following line produces a error which is captured in the log file:"
 	$File = Log "File:" (Get-ChildItem "C:\NoSuchFile.txt" -ErrorAction SilentlyContinue)
 	Log-Verbose "The switch -FlushErrors prevents the error being logged:"
@@ -114,12 +113,14 @@ Set-Alias Log-Verbose  Log-Entry -Scope:Global -Description "By default, the ver
 Function Global:Set-LogFile([Parameter(Mandatory=$True)][IO.FileInfo]$Location, [Int]$Preserve = 100e3, [String]$Divider = "") {
 	$MyInvocation.BoundParameters.Keys | ForEach {$My.Log.$_ = $MyInvocation.BoundParameters.$_}
 	If ($Location) {
-		If ((Test-Path($Location)) -And $Preserve) {
-			$My.Log.Length = (Get-Item($Location)).Length 
-			If ($My.Log.Length -gt $Preserve) {									# Prevent the log file to grow indefinitely
-				$Content = [String]::Join("`r`n", (Get-Content $Location))
-				$Start = $Content.LastIndexOf("`r`n$Divider`r`n", $My.Log.Length - $Preserve)
-				If ($Start -gt 0) {Set-Content $Location $Content.SubString($Start + $Divider.Length + 4)}
+		If (Test-Path($Location)) {
+				If ($Preserve) {
+				$My.Log.Length = (Get-Item($Location)).Length 
+				If ($My.Log.Length -gt $Preserve) {									# Prevent the log file to grow indefinitely
+					$Content = [String]::Join("`r`n", (Get-Content $Location))
+					$Start = $Content.LastIndexOf("`r`n$Divider`r`n", $My.Log.Length - $Preserve)
+					If ($Start -gt 0) {Set-Content $Location $Content.SubString($Start + $Divider.Length + 4)}
+				}
 			}
 			If ($My.Log.Length -gt 0) {Add-content $Location $Divider}
 		}
