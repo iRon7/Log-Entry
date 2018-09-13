@@ -113,17 +113,15 @@ Set-Alias Log-Verbose  Log-Entry -Scope:Global -Description "By default, the ver
 Function Global:Set-LogFile([Parameter(Mandatory=$True)][IO.FileInfo]$Location, [Int]$Preserve = 100e3, [String]$Divider = "") {
 	$MyInvocation.BoundParameters.Keys | ForEach {$My.Log.$_ = $MyInvocation.BoundParameters.$_}
 	If ($Location) {
-		If (Test-Path($Location)) {
-				If ($Preserve) {
-				$My.Log.Length = (Get-Item($Location)).Length 
-				If ($My.Log.Length -gt $Preserve) {									# Prevent the log file to grow indefinitely
-					$Content = [String]::Join("`r`n", (Get-Content $Location))
-					$Start = $Content.LastIndexOf("`r`n$Divider`r`n", $My.Log.Length - $Preserve)
-					If ($Start -gt 0) {Set-Content $Location $Content.SubString($Start + $Divider.Length + 4)}
-				}
+		If ((Test-Path($Location)) -And $Preserve) {
+			$My.Log.Length = (Get-Item($Location)).Length 
+			If ($My.Log.Length -gt $Preserve) {									# Prevent the log file to grow indefinitely
+				$Content = [String]::Join("`r`n", (Get-Content $Location))
+				$Start = $Content.LastIndexOf("`r`n$Divider`r`n", $My.Log.Length - $Preserve)
+				If ($Start -gt 0) {Set-Content $Location $Content.SubString($Start + $Divider.Length + 4)}
 			}
-			If ($My.Log.Length -gt 0) {Add-content $Location $Divider}
 		}
+		If ($My.Log.Length -gt 0) {Add-content $Location $Divider}
 	}
 }; Set-Alias LogFile Set-LogFile -Scope:Global -Description "Redirects the log file to a custom location"
 
