@@ -92,7 +92,7 @@ The log file location can be redirected with the `Set-LogFile` command.
 |`-Separator <String>`            |Specifies a separator string to the output between objects displayed on the console and written to the log file.|
 |`-NoNewline`                     |Specifies that the content displayed in the console and written in the log file does not end with a newline character. Note that the implementation is similar to `Write-Host` implementation except that it places a separator in front of the following entry (use `-Separator ""` suppress this feature)|
 |`-Indent <Int32>`                |# Specifies the indent (number of tabs) preceded to the outpute. Default: no tabs.|
-|`-Strip <int32>`                 |Truncates strings at the given length and removes redundant white space characters if the value supplied is equal or larger than `0`. Set `-Strip -1` prevents truncating and the removal of with space characters. The default value `Log-Entry` is `-1`.|
+|`-Strip <int32>`                 |Truncates strings at the given length and removes redundant white space characters if the value supplied is equal or larger than `0`. Set `-Strip -1` prevents truncating and the removal of with space characters. The default value `Log-Entry` is `80`.|
 |`-QuoteString`                   |Quote bare strings. (strings embedded in object will always be quoted.)|
 |`-Depth <int32>`                 |The maximal number of recursive iterations to reveal embedded objects. The default depth for `Log-Entry` is `1`.|
 |`-Expand`                        |Expands embedded objects over multiple lines for better readability.|
