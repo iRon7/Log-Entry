@@ -62,7 +62,7 @@ For the latest [`Log-Entry.ps1`](https://github.com/iRon7/Log-Entry/Log-Entry.ps
 Usage
 -----
 
-Download the above  [`Log-Entry.ps1` framwork](https://github.com/iRon7/Log-Entry/Log-Entry.ps1) and replace the examples in the `Main {}` function with your own script.  Everywhere you would like to display and log information, use the `Log` command (similar to the `Write-Host` command syntax).  
+Download the above  [`Log-Entry.ps1` framework](https://raw.githubusercontent.com/iRon7/Log-Entry/master/Log-Entry.ps1) and replace the examples in the `Main {}` function with your own script.  Everywhere you would like to display and log information, use the `Log` command (similar to the `Write-Host` command syntax).  
 Run the script and check the log file at: `%Temp%\<ScriptName>.Log`
 
 
