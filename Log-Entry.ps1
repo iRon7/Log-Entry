@@ -5,9 +5,10 @@
 	A PowerShell framework for sophisticated logging
 .Notes
 	Author:    Ronald Bode
-	Version:   02.01.07
+	Version:   02.01.08
 	Created:   2009-03-18
-	Modified:  2018-09-13
+	Modified:  2019-10-30
+
 .Link
 	https://github.com/iRon7/Log-Entry
 #>
@@ -37,6 +38,7 @@ Function Main {
 	$Periphery = Log (2 * $Height + 2 * $Width) ? -Color Green -NoNewline
 	Log "Inch"
 	Log-Debug "Password:" $Password "(This will not be shown and captured unless the common -Debug argument is supplied)"
+	Log -line "This line will have the code line number at the beginning" #v02.01.08
 }
 
 # ------------------------------------- Global --------------------------------
@@ -67,9 +69,11 @@ Function Global:Log-Entry {
 	Param(
 		$0, $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15,	# PSv2 doesn't support PositionalBinding
 		[ConsoleColor]$BackgroundColor, [Alias("Color")][ConsoleColor]$ForegroundColor, [String]$Separator = " ", [Switch]$NoNewline,
-		[Int]$Indent = 0, [Int]$Strip = 80, [Switch]$QuoteString, [Int]$Depth = 1, [Switch]$Expand, [Switch]$Type, [Switch]$FlushErrors
+		[Int]$Indent = 0, [Int]$Strip = 80, [Switch]$QuoteString, [Int]$Depth = 1, [Switch]$Expand, [Switch]$Type, [Switch]$FlushErrors,
+		[Alias('line','showline','showlinenumber')][Switch]$param_ShowLineNumbersInConsole #v02.01.08
 	)
 	$Noun = ($MyInvocation.InvocationName -Split "-")[-1]
+	$LineNumberOfCallingCode = "{0:0000}" -f $MyInvocation.ScriptLineNumber #v02.01.08
 	Function IsQ($Item) {If ($Item -is [String]) {$Item -eq "?"} Else {$False}}
 	$Arguments = $MyInvocation.BoundParameters
 	If (!$My.Log.ContainsKey("Location")) {Set-LogFile "$Env:Temp\$($My.Name).log"}
@@ -94,7 +98,8 @@ Function Global:Log-Entry {
 	}
 	If ($Arguments.ContainsKey("0") -And ($Noun -ne "Debug" -or $Script:Debug)) {
 		$Tabs = "`t" * $Indent; $Line = $Tabs + (($Items -Join $Separator) -Replace "`r`n", "`r`n$Tabs")
-		If (!$My.Log.Inline) {$My.Log.Buffer += (Get-Date -Format "HH:mm:ss.ff") + "`t$Tabs"}
+		If (!$My.Log.Inline) {$My.Log.Buffer += (Get-Date -Format "HH:mm:ss.ff") + "`t$LineNumberOfCallingCode" + "`t$Tabs"} #modified v02.01.08
+		If ($param_ShowLineNumbersInConsole) { $Line = "$LineNumberOfCallingCode`t"+$Line } #v02.01.08
 		$My.Log.Buffer += $Line -Replace "`r`n", "`r`n           `t$Tabs"
 		If ($Noun -ne "Verbose" -or $Script:Verbose) {
 			$Write = "Write-Host `$Line" + $((Get-Command Write-Host).Parameters.Keys | Where {$Arguments.ContainsKey($_)} | ForEach {" -$_`:`$$_"})
@@ -154,5 +159,6 @@ $MyInvocation.MyCommand.Parameters.Keys | Where {Test-Path Variable:"$_"} | ForE
 	If ($Value -is [IO.FileInfo]) {Set-Variable $_ -Value ([Environment]::ExpandEnvironmentVariables($Value))}
 }
 
+
 Main
-End	
+End
