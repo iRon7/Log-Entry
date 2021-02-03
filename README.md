@@ -57,7 +57,7 @@ I have put the whole solution in a framework consisting few major parts:
    - `End-Script` (alias `End`) which might be used to nicely close the session
    - `ConvertTo-Text` (alias `CText`) to resolve objects
 
-For the latest [`Log-Entry.ps1`](https://github.com/iRon7/Log-Entry/Log-Entry.ps1) version, see: https://github.com/iRon7/Log-Entry.
+For the latest [`Log-Entry.ps1`](https://github.com/iRon7/Log-Entry/blob/master/Log-Entry.ps1) version, see: https://github.com/iRon7/Log-Entry.
 
 Usage
 -----
